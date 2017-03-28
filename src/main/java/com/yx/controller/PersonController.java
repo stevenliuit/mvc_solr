@@ -44,4 +44,28 @@ public class PersonController {
             return GenResult.FAILED.genResult();
         }
     }
+
+    @RequestMapping(value = "getCloudById")
+    @ResponseBody
+    public Map<String, Object> getCloudById(String id) {
+        try {
+            List<Person> persons = personService.getCloudById(id);
+            return GenResult.SUCCESS.genResult(persons);
+        } catch (Exception e) {
+            log.error(e, e);
+            return GenResult.FAILED.genResult();
+        }
+    }
+
+    @RequestMapping(value = "getCloudByName")
+    @ResponseBody
+    public Map<String, Object> getCloudByName(String name) {
+        try {
+            List<Person> persons = personService.getCloudByName(name);
+            return GenResult.SUCCESS.genResult(persons);
+        } catch (Exception e) {
+            log.error(e, e);
+            return GenResult.FAILED.genResult();
+        }
+    }
 }

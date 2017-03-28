@@ -5,14 +5,28 @@
 
     <!--定义solr的server-->
     <bean id="httpSolrServer" class="org.apache.solr.client.solrj.impl.HttpSolrServer">
-        <constructor-arg index="0" value="${solr.Url}"/>
+        <constructor-arg index="0" value="${search_engines.url}"/>
         <!-- 设置响应解析器 -->
         <property name="parser">
             <bean class="org.apache.solr.client.solrj.impl.XMLResponseParser"/>
         </property>
         <!-- 设置重试次数-->
-        <property name="maxRetries" value="${solr.maxRetries}"/>
+        <property name="maxRetries" value="${search_engines.maxRetries}"/>
         <!-- 建立连接的最长时间 -->
-        <property name="connectionTimeout" value="${solr.connectionTimeout}"/>
+        <property name="connectionTimeout" value="${search_engines.connectionTimeout}"/>
+    </bean>
+
+    <!--定义solrcloud的server-->
+    <bean id="cloudSolrServer" class="org.apache.solr.client.solrj.impl.CloudSolrServer">
+        <constructor-arg index="0" value="${search_engines.zkHost}"/>
+        <!-- 设置响应解析器 -->
+        <property name="parser">
+            <bean class="org.apache.solr.client.solrj.impl.XMLResponseParser"/>
+        </property>
+        <!--默认的Collection-->
+        <property name="defaultCollection" value="${search_engines.defaultCollection}"/>
+        <!-- 建立连接的最长时间 -->
+        <property name="zkConnectTimeout" value="${search_engines.connectionTimeout}"/>
+        <property name="zkClientTimeout" value="${search_engines.connectionTimeout}"/>
     </bean>
 </beans>
