@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+
+    <task:scheduler id="qbScheduler" pool-size="15"/>
+
+    <bean id="scheduleImportDataService" class="com.yx.schedule.ScheduleImportDataService">
+        <constructor-arg index="0" value="${search_engines.data_import.server}"/>
+        <constructor-arg index="1" value="${search_engines.data_import.port}"/>
+        <constructor-arg index="2" value="${search_engines.data_import.appName}"/>
+        <constructor-arg index="3" value="${search_engines.data_import.collectionName}"/>
+        <constructor-arg index="4" value="${search_engines.data_import.requestHandler}"/>
+    </bean>
+
+
+    <task:scheduled-tasks scheduler="qbScheduler">
+        <!--秒、分、时、日、月、周--><!--每分钟-->
+        <task:scheduled ref="scheduleImportDataService" method="importData" cron="0 * * * * ?"/>
+    </task:scheduled-tasks>
+</beans>
