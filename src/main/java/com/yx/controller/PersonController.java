@@ -68,4 +68,17 @@ public class PersonController {
             return GenResult.FAILED.genResult();
         }
     }
+
+    //多条件，日期范围
+    @RequestMapping(value = "getFilterQuery")
+    @ResponseBody
+    public Map<String, Object> getFilterQuery() {
+        try {
+            List<Person> persons = personService.getFilterQuery();
+            return GenResult.SUCCESS.genResult(persons);
+        } catch (Exception e) {
+            log.error(e, e);
+            return GenResult.FAILED.genResult();
+        }
+    }
 }
