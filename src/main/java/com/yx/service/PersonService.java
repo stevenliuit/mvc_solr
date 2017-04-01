@@ -63,6 +63,7 @@ public class PersonService {
         query.setQuery("last_modified:[NOW/DAY TO *]");
         query.setQuery("UPDATE_TIME:[20170330172445 TO *]");//字符串范围
         query.setQuery("ljggfwpt:认真学习");
+        query.setSort("UPDATE_TIME", SolrQuery.ORDER.desc);//排序的字段需要在schema.xml文件中设置 multiValued="false"
         QueryResponse queryResponse = httpSolrServer.query(query);
         SolrDocumentList documentList = queryResponse.getResults();
         for (SolrDocument document : documentList) {
