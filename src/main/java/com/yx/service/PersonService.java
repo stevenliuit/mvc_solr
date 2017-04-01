@@ -61,6 +61,7 @@ public class PersonService {
 //        query.setQuery("last_modified:[NOW/DAY-3DAY TO *]");日期计算
 //        query.setQuery("last_modified:[* TO NOW/DAY]");
         query.setQuery("last_modified:[NOW/DAY TO *]");
+        query.setQuery("UPDATE_TIME:[20170330172445 TO *]");//字符串范围
         query.setQuery("ljggfwpt:认真学习");
         QueryResponse queryResponse = httpSolrServer.query(query);
         SolrDocumentList documentList = queryResponse.getResults();
